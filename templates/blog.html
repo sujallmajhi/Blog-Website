@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block body %}
+<!-- Page content-->
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-8">
+            <!-- Post content-->
+            <article>
+                <!-- Post header-->
+                <header class="mb-4">
+                    <!-- Post title-->
+                    <h1 class="fw-bolder mb-1">{{first_post.title}}</h1>
+                    <!-- Post meta content-->
+                    <div class="text-muted fst-italic mb-2">{{first_post.created_at}}by:{{first_post.author}}</div>
+                    <!-- Post category-->
+                    <a class="badge bg-danger text-decoration-none text-light" href="#!">{{first_post.category}}</a>
+                </header>
+                <!-- Preview image figure-->
+                <figure class="mb-4">
+                    <img class="img-fluid rounded" src="{{first_post.featured_image.url}}" alt="..."
+                        style="width: 100%; height: 300px; object-fit: cover;" />
+                </figure>
+                </figure>
+                <!-- Post content-->
+                <section class="mb-5">
+                    <p class="fs-5 mb-4">{{first_post.short_description}}</p>
+                    <p class="fs-5 mb-4">{{first_post.blog_body}}</p>
+                    <!-- comments  -->
+                    <div class="mt-4">
+                        <h6 class="fw-bold mb-3">Discussion ({{ comment_count }})</h6>
+
+                        <div class="comment-feed mb-4">
+                            {% if comments %}
+                            {% for c in comments %}
+                            <div class="py-2 border-bottom">
+                                <div class="d-flex justify-content-between">
+                                    <span class="small fw-bold">@{{ c.user }}</span>
+                                    <span class="text-muted" style="font-size: 0.7rem;">{{ c.created_at|timesince }}
+                                        ago</span>
+                                </div>
+                                <p class="mb-1 small text-secondary">{{ c.comment }}</p>
+                            </div>
+                            {% endfor %}
+                            {% else %}
+                            <p class="text-muted small italic">No comments yet.</p>
+                            {% endif %}
+                        </div>
+
+                        <div class="comment-form">
+                            {% if user.is_authenticated %}
+                            <form action="" method="POST">
+                                {% csrf_token %}
+                                <textarea name="comment" class="form-control form-control-sm border-0 bg-light mb-2"
+                                    placeholder="Add a comment..." rows="2" style="border-radius: 8px;"></textarea>
+                                <div class="text-end">
+                                    <button type="submit" class="btn btn-info btn-md rounded-pill px-3">Post</button>
+                                </div>
+                            </form>
+                            {% else %}
+                            <div class="py-2 px-3 bg-light rounded-pill text-center">
+                                <small class="text-muted">
+                                    Please <a href="{% url 'login' %}"
+                                        class="text-primary text-decoration-none fw-bold">Login</a> to comment.
+                                </small>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <!-- comment end  -->
+                </section>
+            </article>
+        </div>
+        <!-- Side widgets-->
+        <div class="col-lg-4">
+
+            <!-- Categories widget-->
+            <div class="card mb-4 p-3">
+                <h4 class="font-italic">Categories</h4>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <ul class="list-unstyled mb-0">
+                                {% for cat in categories %}
+                                <li><a href="{% url 'post_by_category' cat.id %}">{{cat.category_name}}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock body %}

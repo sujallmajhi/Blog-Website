@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+<div class="container mt-4">
+    <h1>Search results for: "{{ keyword }}"</h1>
+
+    <div class="row mb-2">
+        {% if blogs %}
+        {% for i in blogs %}
+        <div class="col-md-6">
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-body">
+                    <span class="badge bg-primary mb-2">{{ i.category.category_name }}</span>
+
+                    <h3><a href="{% url 'blog' i.slug %}" class="text-dark text-decoration-none">{{ i.title }}</a></h3>
+
+                    <small class="mb-1 text-muted">
+                        {{ i.created_at|timesince }} ago | <strong>Author: {{ i.author.username }}</strong>
+                    </small>
+
+                    <p class="card-text mt-2">{{ i.short_description|truncatewords:20 }}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <div class="col-12">
+            <p class="text-danger">No posts found matching your search criteria.</p>
+            <a href="{% url 'home' %}" class="btn btn-outline-secondary">Back to Home</a>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock body %}

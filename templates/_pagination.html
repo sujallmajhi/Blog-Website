@@ -1,0 +1,29 @@
+<nav aria-label="Page navigation" class="my-5">
+    <ul class="pagination justify-content-center">
+        {% if posts.has_previous %}
+        <li class="page-item">
+            <a class="page-link"
+                href="?page=1{% if keyword %}&keyword={{ keyword }}{% endif %}#recent-posts">&laquo;&laquo;</a>
+        </li>
+        <li class="page-item">
+            <a class="page-link"
+                href="?page={{ posts.previous_page_number }}{% if keyword %}&keyword={{ keyword }}{% endif %}#recent-posts">Previous</a>
+        </li>
+        {% endif %}
+
+        <li class="page-item active">
+            <span class="page-link">{{ posts.number }} / {{ posts.paginator.num_pages }}</span>
+        </li>
+
+        {% if posts.has_next %}
+        <li class="page-item">
+            <a class="page-link"
+                href="?page={{ posts.next_page_number }}{% if keyword %}&keyword={{ keyword }}{% endif %}#recent-posts">Next</a>
+        </li>
+        <li class="page-item">
+            <a class="page-link"
+                href="?page={{ posts.paginator.num_pages }}{% if keyword %}&keyword={{ keyword }}{% endif %}#recent-posts">&raquo;&raquo;</a>
+        </li>
+        {% endif %}
+    </ul>
+</nav>

@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="container-fluid mt-4">
+  <div class="row">
+    {% include 'dashboard/sidebar.html' %}
+
+    <div class="col-md-9">
+      {% if perms.auth.view_user %}
+      <div class="card shadow-sm">
+        <div class="card-header bg-white d-flex justify-content-between align-items-center">
+          <h5 class="mb-0">All Users</h5>
+          <a href="{% url 'add_user' %}" class="btn btn-outline-danger btn-md">Add Users</a>
+        </div>
+        <div class="table-responsive">
+          <table class="table table-hover align-middle">
+            <thead class="table-light">
+              <tr>
+                <th>S.no</th>
+                <th>Full name</th>
+                <th>User name</th>
+                <th>Email</th>
+                <th class="text-center">Active</th>
+                <th class="text-center">Staff</th>
+                <th class="text-center">Superuser</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for user in users %}
+              <tr>
+                <th>{{ forloop.counter }}</th>
+                <td>{{ user.first_name }} {{ user.last_name }}</td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.email }}</td>
+                
+                {# Active Status Icon #}
+                <td class="text-center">
+                  {% if user.is_active %}
+                    <i class="fa-solid fa-circle-check text-success"></i>
+                  {% else %}
+                    <i class="fa-solid fa-circle-xmark text-danger"></i>
+                  {% endif %}
+                </td>
+
+                {# Staff Status Icon #}
+                <td class="text-center">
+                  {% if user.is_staff %}
+                    <i class="fa-solid fa-circle-check text-success"></i>
+                  {% else %}
+                    <i class="fa-solid fa-circle-xmark text-danger"></i>
+                  {% endif %}
+                </td>
+
+                {# Superuser Status Icon #}
+                <td class="text-center">
+                  {% if user.is_superuser %}
+                    <i class="fa-solid fa-circle-check text-success"></i>
+                  {% else %}
+                    <i class="fa-solid fa-circle-xmark text-danger"></i>
+                  {% endif %}
+                </td>
+              
+                <td>
+                  <a href="{% url 'edit_user' user.id %}"><i class="fa-solid fa-pen-to-square text-warning"></i></a>
+                  &emsp;
+                  <a href="{% url 'delete_user' user.id %}"><i class="fa-solid fa-trash text-danger"></i></a>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+      
+      {% else %}
+      <h5>You dont have permission to view this page</h5>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock body %}
