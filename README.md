@@ -1,5 +1,6 @@
 Introduction:This is a blog platform build using Django , for Users to Create and Manage Posts,read articles and Comment on the Content:
 It allows user to search blog posts by title,category and author.used django built authentication for secure login and Registration .Role based accessAuthors manage their posts and readers manage their comments.
+**************************************************************************************
 ***************************Screenshot of webpages*********************************
 <img width="1920" height="1080" alt="Screenshot (107)" src="https://github.com/user-attachments/assets/a5d1bf06-3d48-4e6b-862e-d59960b53930" />
 <img width="1920" height="1080" alt="Screenshot (108)" src="https://github.com/user-attachments/assets/c8bfb9c6-525d-436e-a8f2-ef57b37de106" />
@@ -11,4 +12,4 @@ It allows user to search blog posts by title,category and author.used django bui
 <img width="1920" height="1080" alt="Screenshot (113)" src="https://github.com/user-attachments/assets/9a45c7e8-2e0a-4246-9a0f-8f821520eaed" />
 <img width="1920" height="1080" alt="Screenshot (115)" src="https://github.com/user-attachments/assets/77ee8f15-734b-4f87-9947-79d089a19ec2" />
 <img width="19<img width="1920" height="1080" alt="Screenshot (117)" src="https://github.com/user-attachments/assets/74da2b3a-42e6-48be-872a-67bc76e78e62" />
-20" height="1080" alt="Screenshot (116)" src="https://github.com/user-attachments/assets/bdde2503-a722-4fc5-89c3-e77be439949c" />
+
